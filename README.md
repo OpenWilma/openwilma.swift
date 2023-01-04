@@ -1,3 +1,3 @@
 # openwilma.swift
 
-A description of this package.
+OpenWilma Library for Swift programming language
