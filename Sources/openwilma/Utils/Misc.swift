@@ -21,7 +21,27 @@ extension String {
         let result = regex.stringByReplacingMatches(in: self, options: replacingOptions, range: range, withTemplate: template)
         return result.isEmpty ? nil : result
     }
+    
+    func toInt() -> Int? {
+      var result: Int? = nil
+      if let i = Int(self) {
+          result = i
+      }
+      return result
+    }
  }
+
+extension Substring {
+    
+    func toInt() -> Int? {
+      var result: Int? = nil
+      if let i = Int(String(self)) {
+          result = i
+      }
+      return result
+    }
+    
+}
 
 extension String.Element {
 

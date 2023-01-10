@@ -3,18 +3,21 @@ import XCTest
 
 class AnnouncementsTest: XCTestCase {
     private let server = WilmaServer(url: "https://espoondemo.inschool.fi")
-
+    private var session: WilmaSession? = nil
+    
+    override func setUp() async throws {
+        session = try await OpenWilma.signIn(server, "oppilas", "oppilas")
+    }
+    
     /// Network
     
     func testLoadingList() async throws {
-        let session = try await OpenWilma.signIn(server, "oppilas", "oppilas")
-        let announcementsList = try await OpenWilma.getAnnouncements(session)
+        let announcementsList = try await OpenWilma.getAnnouncements(session!)
         print(announcementsList)
     }
     
     func testLoadingContent() async throws {
-        let session = try await OpenWilma.signIn(server, "oppilas", "oppilas")
-        let announcementsList = try await OpenWilma.getAnnouncement(session, 57)
+        let announcementsList = try await OpenWilma.getAnnouncement(session!, 57)
         print(announcementsList)
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSoup
 
-public struct WilmaAnnouncementsParser {
+struct WilmaAnnouncementsParser {
     
     private static let creatorRegex = try! NSRegularExpression(pattern: #"\((.*?)\)"#, options: [])
     static let dateFormat: DateFormatter = {
@@ -41,7 +41,7 @@ public struct WilmaAnnouncementsParser {
                     }
                 } else if element.tagNameNormal() == "div" && element.hasClass("well") && currentDate != nil {
                     let title = try element.getElementsByTag("h3").first()!.text()
-                    let description = try? element.getElementsByClass("sub-text").first()?.text()
+                    let description = try? element.getElementsByClass("sub-text").first()?.text(trimAndNormaliseWhitespace: false)
                     // If news id is not present, user is unable to view its full content.
                     let newsId = Int((try? element.getElementsByTag("a").first()?.attr("href"))?.split(separator: "/").last?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") ?? -1
                     let linkContainer = try? element.getElementsByClass("horizontal-link-container small").first()

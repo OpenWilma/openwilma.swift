@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WilmaTeacher: Codable, Hashable {
-    public let primusId: Int
+    public let primusId: Int?
     public let codeName: String
     public let fullName: String
     public var firstName: String? = nil

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct JSONDateUtils {
+struct JSONDateUtils {
     
     static let yearMonthDay: DateFormatter = {
         var dateFormatter = DateFormatter()
@@ -27,6 +27,27 @@ public struct JSONDateUtils {
     static let nonStandard: DateFormatter = {
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/Helsinki")
+        return dateFormatter
+    }()
+    
+    static let finnishTime: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/Helsinki")
+        return dateFormatter
+    }()
+    
+    static let finnishFormatted: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d.M.yyyy"
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/Helsinki")
+        return dateFormatter
+    }()
+    
+    static let time: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
         dateFormatter.timeZone = TimeZone(identifier: "Europe/Helsinki")
         return dateFormatter
     }()
