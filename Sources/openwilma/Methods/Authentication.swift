@@ -47,7 +47,7 @@ public extension OpenWilma {
         
         if redirectUrl.path.first == "/" || redirectUrl.path.starts(with: "/!") {
             var query = ""
-            if #available(iOS 16.0, *) {
+            if #available(iOS 16.0, *), #available(macOS 13.0, *), #available(macCatalyst 16.0, *), #available(watchOS 9.0, *) {
                 query = redirectUrl.query(percentEncoded: false) ?? ""
             } else {
                 query = redirectUrl.query ?? ""
