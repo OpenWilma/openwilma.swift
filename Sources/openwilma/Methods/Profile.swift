@@ -11,7 +11,7 @@ public extension OpenWilma {
     
     static func getUserAccount(_ wilmaSession: WilmaSession) async throws -> WilmaAPIResponse<WilmaAccountInfo>  {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(JSONDateUtils.nonStandard)
+        decoder.dateDecodingStrategy = .formatted(DateUtils.nonStandard)
         let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession.wilmaServer, "api/v1/accounts/me"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<WilmaAccountInfo>.self, decoder: decoder).value
         if let error = response.error {
             throw error

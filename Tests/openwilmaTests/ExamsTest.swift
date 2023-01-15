@@ -12,7 +12,7 @@ class ExamsTest: XCTestCase {
     /// Network
     
     func testPastExams() async throws {
-        let examsList = try await OpenWilma.getPastExams(session!, start: JSONDateUtils.finnishFormatted.date(from: "9.12.2016")!, end: JSONDateUtils.finnishFormatted.date(from: "1.6.2023")!)
+        let examsList = try await OpenWilma.getPastExams(session!, start: DateUtils.finnishFormatted.date(from: "9.12.2016")!, end: DateUtils.finnishFormatted.date(from: "1.6.2023")!)
         print(examsList)
     }
     

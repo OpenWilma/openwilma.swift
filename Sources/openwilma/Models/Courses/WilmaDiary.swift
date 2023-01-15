@@ -17,7 +17,7 @@ public struct WilmaDiary: Codable, Hashable {
             "caption": ["caption"]
         ]
         let container = try decoder.container(keyedBy: AnyKey.self)
-        self.date = try! container.decodeStringDate(JSONDateUtils.nonStandard, forMappedKey: "date", in: keyMap)!
+        self.date = try! container.decodeStringDate(DateUtils.nonStandard, forMappedKey: "date", in: keyMap)!
         self.caption = try! container.decode(String.self, forMappedKey: "caption", in: keyMap)
     }
 }

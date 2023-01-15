@@ -19,9 +19,9 @@ public struct Group: Codable, Hashable {
     public var fullCaption: String? = nil
     private var startDate: Date? = nil
     private var endDate: Date? = nil
-    public var isCommitted: Bool = false
-    public var teachers: [ScheduleResource]? = nil
-    public var rooms: [ScheduleResource] = []
+    public var isCommitted: Bool? = false
+    public var teachers: [ScheduleResource]? = []
+    public var rooms: [ScheduleResource]? = []
     
     // Original JSON keys from Wilma JSON response
     enum CodingKeys: String, CodingKey {

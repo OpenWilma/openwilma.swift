@@ -32,10 +32,10 @@ struct WilmaExamsParser {
             
             var timestamp: Date? = nil
             
-            timestamp = try? JSONDateUtils.finnishTime.date(from: dateAndTime?.text().lowercased() ?? "")
+            timestamp = try? DateUtils.finnishTime.date(from: dateAndTime?.text().lowercased() ?? "")
             if timestamp == nil, let dateValue = try? dateAndTime?.text().lowercased() {
                 let backupTimestamp = dateRegex.firstMatch(in: dateValue, range: NSRange(dateValue.startIndex..<dateValue.endIndex, in: dateValue)).map({String(dateValue[Range($0.range, in: dateValue)!])})
-                timestamp = JSONDateUtils.finnishFormatted.date(from: String(backupTimestamp ?? ""))
+                timestamp = DateUtils.finnishFormatted.date(from: String(backupTimestamp ?? ""))
             }
             
             var subject: String?, courseCode: String?, courseName: String?, grade: String?, verbalGrade: String?
@@ -88,7 +88,7 @@ struct WilmaExamsParser {
                 
                 if let dateValue = try? dateAndTime?.text().lowercased() {
                     let timestampResult = dateRegex.firstMatch(in: dateValue, range: NSRange(dateValue.startIndex..<dateValue.endIndex, in: dateValue)).map({String(dateValue[Range($0.range, in: dateValue)!])})
-                    timestamp = JSONDateUtils.finnishFormatted.date(from: String(timestampResult ?? ""))
+                    timestamp = DateUtils.finnishFormatted.date(from: String(timestampResult ?? ""))
                 }
                 
                 var subject: String?, courseCode: String?, courseName: String?

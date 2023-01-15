@@ -30,11 +30,11 @@ public struct WilmaCourseExam: Codable, Hashable {
         ]
         let container = try decoder.container(keyedBy: AnyKey.self)
         self.id = try! container.decode(Int.self, forMappedKey: "id", in: keyMap)
-        self.date = try! container.decodeStringDate(JSONDateUtils.yearMonthDay, forMappedKey: "date", in: keyMap)!
+        self.date = try! container.decodeStringDate(DateUtils.yearMonthDay, forMappedKey: "date", in: keyMap)!
         self.caption = try? container.decode(String?.self, forMappedKey: "caption", in: keyMap)
         self.topic = try? container.decode(String?.self, forMappedKey: "topic", in: keyMap)
-        self.timeStart = try! container.decodeStringDate(JSONDateUtils.time, forMappedKey: "timeStart", in: keyMap)
-        self.timeEnd = try! container.decodeStringDate(JSONDateUtils.time, forMappedKey: "timeEnd", in: keyMap)
+        self.timeStart = try! container.decodeStringDate(DateUtils.time, forMappedKey: "timeStart", in: keyMap)
+        self.timeEnd = try! container.decodeStringDate(DateUtils.time, forMappedKey: "timeEnd", in: keyMap)
         self.grade = try? container.decode(String?.self, forMappedKey: "grade", in: keyMap)
         self.verbalGrade = try? container.decode(String?.self, forMappedKey: "verbalGrade", in: keyMap)
     }

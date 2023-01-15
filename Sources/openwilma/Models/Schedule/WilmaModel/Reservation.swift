@@ -12,8 +12,8 @@ public struct Reservation: Codable, Hashable {
     public var scheduleId: Int
     public var day: Int
     public var start: String
-    public var startDate: Date
-    public var endDate: Date
+    public var startDate: Date?
+    public var endDate: Date?
     public var end: String
     public var color: String
     public var wilmaClass: String
