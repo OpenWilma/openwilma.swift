@@ -23,6 +23,16 @@ class ScheduleTest: XCTestCase {
     func testScheduleRange() async throws {
         let scheduleRange = try await OpenWilma.getScheduleRange(session!, Date(), Date().addDays(days: 12)!)
         print(scheduleRange)
+        let decoder = JSONEncoder()
+        decoder.dateEncodingStrategy = .formatted(DateUtils.standard)
+        print(String(data: try decoder.encode(scheduleRange), encoding: .utf8)!)
+    }
+    
+    func testWeekSplitter() {
+        let decoder = JSONEncoder()
+        decoder.dateEncodingStrategy = .formatted(DateUtils.standard)
+        print(String(data: try! decoder.encode(DateUtils.splitWeeksFromRange(Date(), Date().addDays(days: 12)!)), encoding: .utf8)!)
+        print(String(data: try! decoder.encode([Date(), Date().addDays(days: 12)!]), encoding: .utf8)!)
     }
     
 }

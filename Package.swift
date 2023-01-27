@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "openwilma",
-    platforms: [.iOS(.v13), .macOS(.v10_15)],
+    platforms: [.iOS(.v14), .macOS(.v10_15)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -17,13 +17,14 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.2.0")),
         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3"),
+        .package(url: "https://github.com/stackotter/swift-css-parser.git", branch: "main"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "openwilma",
-            dependencies: ["Alamofire", "SwiftSoup"],
+            dependencies: ["Alamofire", "SwiftSoup", .product(name: "SwiftCSSParser", package: "swift-css-parser")],
             path: "./Sources/openwilma", sources: nil),
         .testTarget(
             name: "openwilmaTests",

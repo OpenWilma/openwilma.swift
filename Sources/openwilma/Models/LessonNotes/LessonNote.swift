@@ -10,7 +10,7 @@ import Foundation
 public struct LessonNote: Codable, Hashable {
     public let id: Int?
     public var clarificationId: Int?
-    public let nodeCodename: String?
+    public let noteCodename: String?
     public let noteName: String?
     public let discName: String?
     public let courseCode: String?

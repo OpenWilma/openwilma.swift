@@ -10,4 +10,9 @@ import Foundation
 public struct ScheduleDay: Codable, Hashable {
     public var reservations: [Reservation]
     public var date: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case reservations = "reservationList"
+        case date = "day"
+    }
 }

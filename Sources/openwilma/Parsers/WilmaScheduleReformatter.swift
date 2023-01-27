@@ -32,9 +32,11 @@ struct WilmaScheduleReformatter {
     
     static func reformatSchedule(_ schedule: ScheduleResponse, _ date: Date = Date()) -> WilmaSchedule {
         // Monday
-        let monday = date.midnight.startOfWeek
+        let monday = date.midnight.firstDayOfWeek
         
-        var reservations: [TimeInterval: [Reservation]] = [:]
+        print(monday)
+        
+        var reservations: OrderedDictionary<TimeInterval, [Reservation]> = OrderedDictionary()
         
         // Making hashmap
         
@@ -44,7 +46,7 @@ struct WilmaScheduleReformatter {
             let startTime = DateUtils.time.date(from: reservation.start)
             let endTime = DateUtils.time.date(from: reservation.end)
             
-            let day = monday?.get(.next, getCorrectWeekday(reservationDay))
+            let day = monday?.setWeekDay(reservationDay+1)
             let dayUnix = day?.timeIntervalSince1970
             
             reservation.startDate = day?.mergeDateAndTime(startTime ?? Date()) ?? startTime!

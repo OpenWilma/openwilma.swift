@@ -31,7 +31,7 @@ public extension OpenWilma {
     static func getCourse(_ wilmaSession: WilmaSession, _ id: Int) async throws -> WilmaAPIResponse<WilmaCourse> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateUtils.yearMonthDay)
-        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession.wilmaServer, "api/v1/gradebooks/\(id)"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<WilmaCourse>.self, decoder: decoder).value
+        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession, "api/v1/gradebooks/\(id)"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<WilmaCourse>.self, decoder: decoder).value
         if let error = response.error {
             throw error
         }
@@ -45,7 +45,7 @@ public extension OpenWilma {
     static func getCourseAdditionalInformation(_ wilmaSession: WilmaSession, _ id: Int) async throws -> WilmaAPIResponse<WilmaCourseInfo> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateUtils.nonStandard)
-        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession.wilmaServer, "api/v1/courses/\(id)"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<WilmaCourseInfo>.self, decoder: decoder).value
+        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession, "api/v1/courses/\(id)"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<WilmaCourseInfo>.self, decoder: decoder).value
         if let error = response.error {
             throw error
         }
@@ -55,7 +55,7 @@ public extension OpenWilma {
     static func getCourseExams(_ wilmaSession: WilmaSession, _ id: Int) async throws -> WilmaAPIResponse<[WilmaCourseExam]> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateUtils.yearMonthDay)
-        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession.wilmaServer, "api/v1/gradebooks/\(id)/exams"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<[WilmaCourseExam]>.self, decoder: decoder).value
+        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession, "api/v1/gradebooks/\(id)/exams"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<[WilmaCourseExam]>.self, decoder: decoder).value
         if let error = response.error {
             throw error
         }
@@ -65,7 +65,7 @@ public extension OpenWilma {
     static func getCourseHomework(_ wilmaSession: WilmaSession, _ id: Int) async throws -> WilmaAPIResponse<[WilmaHomework]> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateUtils.yearMonthDay)
-        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession.wilmaServer, "api/v1/gradebooks/\(id)/homework"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<[WilmaHomework]>.self, decoder: decoder).value
+        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession, "api/v1/gradebooks/\(id)/homework"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<[WilmaHomework]>.self, decoder: decoder).value
         if let error = response.error {
             throw error
         }
@@ -77,7 +77,7 @@ public extension OpenWilma {
     static func getCourseStudents(_ wilmaSession: WilmaSession, _ id: Int) async throws -> WilmaAPIResponse<[WilmaCourseUser]> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateUtils.yearMonthDay)
-        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession.wilmaServer, "api/v1/gradebooks/\(id)/students"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<[WilmaCourseUser]>.self, decoder: decoder).value
+        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession, "api/v1/gradebooks/\(id)/students"), wilmaSession: wilmaSession).serializingDecodable(WilmaAPIResponse<[WilmaCourseUser]>.self, decoder: decoder).value
         if let error = response.error {
             throw error
         }

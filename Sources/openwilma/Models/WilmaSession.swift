@@ -27,6 +27,10 @@ public struct WilmaSession: Codable, Hashable {
         return role
     }
     
+    public mutating func setRole(_ role: WilmaRole) {
+        self.role = role
+    }
+    
     public func getAccountInfo() -> WilmaAccountInfo? {
         return accountInfo
     }

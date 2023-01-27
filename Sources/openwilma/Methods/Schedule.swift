@@ -29,7 +29,7 @@ public extension OpenWilma {
         var terms: [Term] = []
         for week in DateUtils.splitWeeksFromRange(start, end) {
             let schedule = try? await getSchedule(wilmaSession, date: week)
-            days.append(contentsOf: schedule?.days ?? [])
+            (schedule?.days ?? []).forEach {days.append($0)}
             if !(schedule?.terms ?? []).isEmpty && terms.isEmpty {
                 terms.removeAll()
                 terms.append(contentsOf: schedule?.terms ?? [])

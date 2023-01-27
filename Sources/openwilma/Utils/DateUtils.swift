@@ -61,10 +61,11 @@ struct DateUtils {
     
     static func splitWeeksFromRange(_ start: Date, _ end: Date) -> [Date] {
         var dates: [Date] = []
-        var date = start.startOfWeek!
+        var date = start.firstDayOfWeek!
         while date <= end {
-            date = date.next(.monday)
-            dates.append(date)
+            let weekStart = date
+            date = date.addDays(days: 7) ?? date
+            dates.append(weekStart)
         }
         return dates
     }
@@ -90,13 +91,13 @@ extension Date {
         return cal.date(from: components)
     }
     
-    public func mergeDateAndTime(_ time: Date, timeZoneAbbrev: String = "Europe/Helsinki") -> Date? {
+    public func mergeDateAndTime(_ time: Date, timeZone: TimeZone = .current) -> Date? {
         let x: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
         let cal = Calendar.current
         var components = cal.dateComponents(x, from: self)
-        var timeCompoennts = cal.dateComponents(x, from: time)
+        let timeCompoennts = cal.dateComponents(x, from: time)
 
-        components.timeZone = TimeZone(identifier: timeZoneAbbrev)
+        components.timeZone = timeZone
         components.hour = timeCompoennts.hour
         components.minute = timeCompoennts.minute
         components.second = timeCompoennts.second
@@ -165,6 +166,19 @@ extension Date {
         let gregorian = Calendar(identifier: .gregorian)
         guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
         return gregorian.date(byAdding: .day, value: 1, to: sunday)
+    }
+    
+    var firstDayOfWeek: Date? {
+        var c = Calendar(identifier: .iso8601)
+        c.timeZone = TimeZone(secondsFromGMT: 0)!
+        return
+            c.date(from: c.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self))
+    }
+    
+    func setWeekDay(_ day: Int) -> Date? {
+        var c = Calendar(identifier: .iso8601)
+        c.timeZone = TimeZone(secondsFromGMT: 0)!
+        return c.date(bySetting: .weekday, value: day, of: self)
     }
         
     var endOfWeek: Date? {

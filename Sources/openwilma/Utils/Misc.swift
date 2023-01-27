@@ -41,6 +41,10 @@ extension Substring {
       return result
     }
     
+    func toString() -> String? {
+      return String(self)
+    }
+    
 }
 
 extension String.Element {

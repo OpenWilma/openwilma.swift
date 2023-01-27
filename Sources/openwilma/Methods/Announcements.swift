@@ -10,7 +10,7 @@ import Foundation
 public extension OpenWilma {
     
     static func getAnnouncements(_ wilmaSession: WilmaSession) async throws -> [Announcement]  {
-        let response = await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession.wilmaServer, "news?printable&format=json&LangID=1"), wilmaSession: wilmaSession).serializingString().response
+        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession, "news?printable&format=json&LangID=1"), wilmaSession: wilmaSession).serializingString().response
         // Check if Wilma error response in JSON format is present and throw an exception
         if let content = response.data, JSONSerialization.isValidJSONObject(content), let errorContent = try? JSONDecoder().decode(JSONErrorResponseModel.self, from: content), let wilmaError = errorContent.error {
             throw wilmaError
@@ -22,7 +22,7 @@ public extension OpenWilma {
     }
     
     static func getAnnouncement(_ wilmaSession: WilmaSession, _ id: Int) async throws -> Announcement?  {
-        let response = await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession.wilmaServer, "news/\(id)?printable&format=json&LangID=1"), wilmaSession: wilmaSession).serializingString().response
+        let response = try await WilmaHTTPClient.shared.getRequest(URLUtils.buildUrl(wilmaSession, "news/\(id)?printable&format=json&LangID=1"), wilmaSession: wilmaSession).serializingString().response
         // Check if Wilma error response in JSON format is present and throw an exception
         if let content = response.data, JSONSerialization.isValidJSONObject(content), let errorContent = try? JSONDecoder().decode(JSONErrorResponseModel.self, from: content), let wilmaError = errorContent.error {
             throw wilmaError
