@@ -26,7 +26,7 @@ public enum UserType: String {
     case applicant = "applicant"
     case applicant_guardian = "applicantguardian"
     
-    var intValue: Int {
+    public var intValue: Int {
         switch self {
         case .teacher:
             return 1
