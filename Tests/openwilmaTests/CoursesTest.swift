@@ -23,7 +23,7 @@ class CoursesTest: XCTestCase {
             let courseHomework = try await OpenWilma.getCourseHomework(session!, 21128)
             print(course, courseExams, courseHomework)
             do {
-                let courseStudents = try await OpenWilma.getCourseStudents(session!, 21128)
+                let _ = try await OpenWilma.getCourseStudents(session!, 21128)
                 XCTAssert(false, "Course students loaded without permission!")
             } catch let err {
                 print(err)

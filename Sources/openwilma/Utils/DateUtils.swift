@@ -24,6 +24,13 @@ struct DateUtils {
         return dateFormatter
     }()
     
+    static let standardGMT: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        return dateFormatter
+    }()
+    
     static let nonStandard: DateFormatter = {
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
