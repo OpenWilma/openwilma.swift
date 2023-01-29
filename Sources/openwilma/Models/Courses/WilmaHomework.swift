@@ -8,8 +8,8 @@
 import Foundation
 
 public struct WilmaHomework: Codable, Hashable {
-    let date: Date?
-    let caption: String?
+    public let date: Date?
+    public let caption: String?
     
     public init(from decoder: Decoder) throws {
         let keyMap = [
