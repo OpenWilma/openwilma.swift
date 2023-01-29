@@ -15,6 +15,8 @@ public struct URLUtils {
         var slug = try wilmaSession.getRole(requireRole: requireRole)?.slug ?? ""
         if !slug.isEmpty && slug.first == "/" {
             slug.removeFirst()
+        }
+        if !slug.isEmpty && slug.last != "/" {
             slug += "/"
         }
         return wilmaSession.wilmaServer.url.last == "/" ? wilmaSession.wilmaServer.url+slug+path : "\(wilmaSession.wilmaServer.url)/\(slug)\(path)"
@@ -24,6 +26,8 @@ public struct URLUtils {
         var slug = role.slug ?? ""
         if !slug.isEmpty && slug.first == "/" {
             slug.removeFirst()
+        }
+        if !slug.isEmpty && slug.last != "/" {
             slug += "/"
         }
         return wilmaSession.wilmaServer.url.last == "/" ? wilmaSession.wilmaServer.url+slug+path : "\(wilmaSession.wilmaServer.url)/\(slug)\(path)"
