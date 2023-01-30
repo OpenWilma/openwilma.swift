@@ -10,7 +10,7 @@ import Alamofire
 
 struct WilmaRedirectHandler: RedirectHandler {
     func task(_ task: URLSessionTask, willBeRedirectedTo request: URLRequest, for response: HTTPURLResponse, completion: @escaping (URLRequest?) -> Void) {
-        if ((response.url?.query?.contains("invalidsession")) != nil) {
+        if ((response.url?.query?.contains("invalidsession")) == true) {
             var newReq = request
             newReq.url = URL(string: (request.url?.baseURL?.formatted() ?? "")+"/messages/index_json", relativeTo: request.url)
             completion(newReq)
