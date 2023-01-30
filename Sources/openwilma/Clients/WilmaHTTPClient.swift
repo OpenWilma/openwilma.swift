@@ -8,6 +8,18 @@
 import Foundation
 import Alamofire
 
+struct WilmaRedirectHandler: RedirectHandler {
+    func task(_ task: URLSessionTask, willBeRedirectedTo request: URLRequest, for response: HTTPURLResponse, completion: @escaping (URLRequest?) -> Void) {
+        if ((response.url?.query?.contains("invalidsession")) != nil) {
+            var newReq = request
+            newReq.url = URL(string: (request.url?.baseURL?.formatted() ?? "")+"/messages/index_json", relativeTo: request.url)
+            completion(newReq)
+            return
+        }
+        completion(request)
+    }
+}
+
 public struct WilmaHTTPClient {
     
     static let shared = WilmaHTTPClient()
@@ -24,7 +36,7 @@ public struct WilmaHTTPClient {
         configuration.httpShouldSetCookies = false
         configuration.httpCookieAcceptPolicy = .never
         sessionNoRedir = Session(configuration: configuration, redirectHandler: Redirector(behavior: .doNotFollow))
-        session = Session(configuration: configuration)
+        session = Session(configuration: configuration, redirectHandler: WilmaRedirectHandler())
     }
     
     private func wilmaHeaders(_ wilmaSession: WilmaSession? = nil) -> HTTPHeaders? {
