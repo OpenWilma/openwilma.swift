@@ -6,7 +6,9 @@ class AnnouncementsTest: XCTestCase {
     private var session: WilmaSession? = nil
     
     override func setUp() async throws {
-        session = try await OpenWilma.signIn(server, "oppilas", "oppilas")
+        session = try await OpenWilma.signIn(server, "ope", "ope")
+        let roles = try await OpenWilma.getRoles(session!)
+        session?.setRole((roles.payload?.first {$0.type != .wilma_account})!)
     }
     
     /// Network
@@ -17,7 +19,7 @@ class AnnouncementsTest: XCTestCase {
     }
     
     func testLoadingContent() async throws {
-        let announcementsList = try await OpenWilma.getAnnouncement(session!, 57)
+        let announcementsList = try await OpenWilma.getAnnouncement(session!, 21)
         print(announcementsList)
     }
     

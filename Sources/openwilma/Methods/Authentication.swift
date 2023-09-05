@@ -29,6 +29,7 @@ public extension OpenWilma {
             "format": "json"
         ]
         urlRequest.httpBody = try URLEncodedFormEncoder().encode(parameters)
+        urlRequest.headers = [HTTPHeader(name: "Cookie", value: "Wilma2LoginID=\(sessionId.sessionId)")]
         
         let response = await WilmaHTTPClient.shared.postRequest(urlRequest, noRedirect: true).serializingString().response
         
